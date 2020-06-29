@@ -1,0 +1,18 @@
+version: "3"
+services:
+  influxdb:
+    image: influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb:/var/lib/influxdb
+  dummy:
+    image: dm:latest
+    build:
+        context: .
+        dockerfile: Dockerfile
+networks:
+  test_network:
+volumes:
+  influxdb:
+  dummy:
