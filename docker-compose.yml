@@ -4,13 +4,18 @@ services:
     image: influxdb
     ports:
       - "8086:8086"
+    networks:
+      - test_network
     volumes:
       - influxdb:/var/lib/influxdb
   dummy:
     image: dm:latest
-    build:
-        context: .
-        dockerfile: Dockerfile
+    links:
+      - influxdb
+    networks:
+      - test_network
+    volumes: 
+      - dummy:/usr/src/app
 networks:
   test_network:
 volumes:
